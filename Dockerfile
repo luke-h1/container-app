@@ -2,29 +2,30 @@ FROM node:16 as builder
 
 WORKDIR /usr/src/app
 
+COPY package*.json ./
+COPY pnpm-lock.yaml ./
+
 COPY . .
-
-RUN npm install -g pnpm
-
-RUN pnpm i
-
-RUN pnpm run build --filter explore-education-statistics-frontend
-
-# pnpm deploy
-RUN pnpm run deploy --filter explore-education-statistics-frontend --prod public-frontend
+RUN npm i -g pnpm
+RUN pnpm install
+RUN pnpm --filter=explore-education-statistics-frontend build
+RUN pnpm --filter=explore-education-statistics-admin deploy public-frontend
 
 # stage 2
-FROM node:16 as deployer
+FROM node:16
 
 WORKDIR /usr/src/app
 
 COPY --from=builder /usr/src/app/public-frontend .
 
-RUN pnpm i
+COPY package*.json ./
+COPY pnpm-lock.yaml ./
+
+RUN npm i -g pnpm
+RUN pnpm install
 
 ENV NODE_ENV=production
-
 EXPOSE 3000
 
-CMD ["pnpm", "start"]
+CMD [ "pnpm", "start" ]
 USER node
