@@ -1,30 +1,21 @@
-FROM node:16-alpine AS builder
+FROM node:16-alpine as builder
 
 WORKDIR /app
 
+COPY package*.json ./
+COPY pnpm-lock.yaml ./
+
 COPY . .
-
 RUN corepack enable
+RUN pnpm i
 
-RUN pnpm --filter=explore-education-statistics-frontend... install
 RUN pnpm --filter=explore-education-statistics-frontend build
+RUN pnpm --filter=explore-education-statistics-frontend deploy public-frontend --prod
 
-FROM node:16-alpine
-
-WORKDIR /usr/src/app
-
-COPY --from=builder /app/package.json .
-COPY --from=builder /app/pnpm-lock.yaml .
-COPY --from=builder /app/pnpm-workspace.yaml .
-COPY --from=builder /app/src/explore-education-statistics-frontend/ ./src/explore-education-statistics-frontend/
-
-RUN corepack enable
-RUN pnpm --filter=explore-education-statistics-frontend --prod install
-
-WORKDIR /usr/src/app/src/explore-education-statistics-frontend
+WORKDIR /app/public-frontend
 
 ENV NODE_ENV=production
 EXPOSE 3000
 
-USER node
 CMD [ "pnpm", "start" ]
+USER node
