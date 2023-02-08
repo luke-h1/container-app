@@ -1,0 +1,39 @@
+variables:
+  BuildConfiguration: 'Release'
+  CI: true
+  PNPM_VERSION: 7.26.0
+  NODE_VERSION: 16.14.2
+  DOTNET_VERSION: 6.0.x
+  
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+
+  - job: 'Frontend'
+    pool:
+      vmImage: 'ubuntu-20.04'
+      demands: azureps
+
+    steps:
+      - task: NodeTool@0
+        displayName: 'Install Node.js $(NODE_VERSION)'
+        inputs:
+          versionSpec: $(NODE_VERSION)
+
+      - task: 'Bash@3'
+        displayName: 'Install PNPM'
+        inputs:
+          workingDir: '.'
+          targetType: 'inline'
+          script: 'npm i -g pnpm@$(PNPM_VERSION)'
+
+      - task: 'Bash@3'
+        displayName: 'pnpm i'
+        inputs:
+          workingDir: '.'
+          targetType: 'inline'
+          script: 'pnpm i'
