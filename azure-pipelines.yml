@@ -24,6 +24,7 @@ jobs:
         inputs:
           versionSpec: $(NODE_VERSION)
 
+     # TODO: replace with corepack
       - task: 'Bash@3'
         displayName: 'Install PNPM'
         inputs:
