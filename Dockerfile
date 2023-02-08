@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . .
 
+RUN rm -rf src/GovUk.*
+
 RUN corepack enable
 
 RUN pnpm --filter=explore-education-statistics-frontend... install
