@@ -16,7 +16,7 @@ WORKDIR /usr/src/app
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/pnpm-lock.yaml .
 COPY --from=builder /app/pnpm-workspace.yaml .
-# COPY --from=builder /app/src/explore-education-statistics-common/ ./src/explore-education-statistics-common/
+COPY --from=builder /app/src/explore-education-statistics-common/ ./src/explore-education-statistics-common/
 COPY --from=builder /app/src/explore-education-statistics-frontend/ ./src/explore-education-statistics-frontend/
 
 RUN corepack enable
