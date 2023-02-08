@@ -12,7 +12,6 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
-
   - job: 'Frontend'
     pool:
       vmImage: 'ubuntu-20.04'
@@ -38,3 +37,10 @@ jobs:
           workingDir: '.'
           targetType: 'inline'
           script: 'pnpm i'
+
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'eesdev'
+          repository: 'eesfrontendcontainer'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
