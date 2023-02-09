@@ -70,6 +70,9 @@
           "scale": {
             "maxReplicas": 2,
             "minReplicas": 1
+          },
+          "siteConfig": {
+            "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesdev-frontend:latest"
           }
         }
       }
