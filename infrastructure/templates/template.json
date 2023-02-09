@@ -1,7 +1,15 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "parameters": {},
+  "parameters": {
+    "environment_name": {
+      "type": "string",
+      "defaultValue": "eesdev",
+      "metadata": {
+        "description": "The name of the environment to deploy to"
+      }
+    }
+  },
   "variables": {
     "containerAppName": "eesdev-frontend",
     "containerRegistryName": "eesdev"
@@ -18,7 +26,7 @@
       "properties": {
         "name": "[variables('containerAppName')]",
         "ingress": {},
-        "managedEnvironmentId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.AppPlatform/managedEnvironments/', '[variables('containerRegistryName')]')]",
+        "managedEnvironmentId": "[resourceId('Microsoft.App/managedEnvironments', parameters('environment_name'))]",
         "template": {
           "containers": [
             {
