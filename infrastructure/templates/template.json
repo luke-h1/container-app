@@ -25,7 +25,20 @@
       },
       "properties": {
         "name": "[variables('containerAppName')]",
-        "ingress": {},
+        "ingress": {
+          "allowInsecure": false,
+          "external": true,
+          "targetPort": 3000,
+          "traffic": [
+            {
+              "label": "test",
+              "latestRevision": true,
+              "revisionName": "latest",
+              "weight": 100
+            }
+          ],
+          "transport": "http"
+        },
         "managedEnvironmentId": "[resourceId('Microsoft.App/managedEnvironments', parameters('environment_name'))]",
         "template": {
           "containers": [

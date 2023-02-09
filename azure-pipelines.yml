@@ -38,15 +38,13 @@ jobs:
           script: 'pnpm i'
 
       - task: Docker@2
-        displayName: 'Build ocker image'
+        displayName: 'Build Docker image'
         inputs:
           containerRegistry: 'eesdev'
           repository: 'eesfrontendcontainer'
           command: 'build'
           Dockerfile: '**/Dockerfile'
-          tags: |
-            $(Build.BuildId)
-            latest
+          tags: latest
           
       - task: Docker@2
         displayName: 'Push Docker image'
@@ -55,6 +53,4 @@ jobs:
           repository: 'eesfrontendcontainer'
           command: 'push'
           Dockerfile: '**/Dockerfile'
-          tags: |
-            $(Build.BuildId)
-            latest
+          tags: latest
