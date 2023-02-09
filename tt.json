@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "environment": {
@@ -21,19 +21,19 @@
     },
     "dockerImageName": {
       "type": "string",
-      "defaultValue": "eesdev.azurecr.io/eesfrontendcontainer:latest"
+      "defaultValue": "_MY_REGISTRY_USERNAME_.azurecr.io/_MY_NAMESPACE_/_MY_DOCKER_IMAGE_NAME_:_TAG_"
     },
     "dockerRegistryUrl": {
       "type": "string",
-      "defaultValue": "https://eesdev.azurecr.io"
+      "defaultValue": "https://_MY_REGISTRY_USERNAME_.azurecr.io"
     },
     "dockerRegistryUsername": {
       "type": "string",
-      "defaultValue": "eesdev"
+      "defaultValue": "_MY_REGISTRY_USERNAME_"
     },
     "dockerRegistryPassword": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "_MY_REGISTRY_PSW_"
     },
     "_artifactsLocation": {
       "type": "string"
@@ -43,7 +43,7 @@
     }
   },
   "variables": {
-    "name": "ees-",
+    "name": "projectname-",
     "webAppPortalName": "[concat(variables('name'), parameters('environment'), '-webapp')]",
     "appServicePlanName": "[concat(variables('name'), parameters('environment'),'-hosting')]",
     "resources": [
@@ -99,6 +99,5 @@
         }
       }
     ]
-  },
-  "resources": [{}]
+  }
 }
