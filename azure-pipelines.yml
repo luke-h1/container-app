@@ -38,7 +38,7 @@ jobs:
           script: 'pnpm i'
 
       - task: 'Bash@3'
-        displayName: 'pnpm i'
+        displayName: 'pnpm tsc'
         inputs:
           workingDir: '.'
           targetType: 'inline'
