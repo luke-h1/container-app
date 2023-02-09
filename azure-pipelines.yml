@@ -38,9 +38,9 @@ jobs:
           targetType: 'inline'
           script: 'pnpm i'
 
-      - task: Docker@2
-        inputs:
-          containerRegistry: 'eesdev'
-          repository: 'eesfrontendcontainer'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
+      # - task: Docker@2
+      #   inputs:
+      #     containerRegistry: 'eesdev'
+      #     repository: 'eesfrontendcontainer'
+      #     command: 'buildAndPush'
+      #     Dockerfile: '**/Dockerfile'
