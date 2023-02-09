@@ -1,4 +1,5 @@
 variables:
+
   BuildConfiguration: 'Release'
   CI: true
   PNPM_VERSION: 7.26.0
@@ -38,9 +39,15 @@ jobs:
           targetType: 'inline'
           script: 'pnpm i'
 
-      # - task: Docker@2
-      #   inputs:
-      #     containerRegistry: 'eesdev'
-      #     repository: 'eesfrontendcontainer'
-      #     command: 'buildAndPush'
-      #     Dockerfile: '**/Dockerfile'
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'eesdev'
+          repository: 'eesfrontendcontainer'
+          command: 'build'
+          Dockerfile: '**/Dockerfile'
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'      
