@@ -37,20 +37,18 @@ jobs:
           targetType: 'inline'
           script: 'pnpm i'
 
-      - task: Docker@2
-        displayName: 'Build Docker image'
+      - task: 'ArchiveFiles@2'
+        displayName: 'Archive files'
         inputs:
-          containerRegistry: 'eesdev'
-          repository: 'eesfrontendcontainer'
-          command: 'build'
-          Dockerfile: '**/Dockerfile'
-          tags: latest
-          
-      - task: Docker@2
-        displayName: 'Push Docker image'
+          rootFolderOrFile: '$(Build.SourcesDirectory)'
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+          replaceExistingArchive: true
+
+      - task: 'PublishBuildArtifacts@1'
+        displayName: 'Publish Artifact: drop'
         inputs:
-          containerRegistry: 'eesdev'
-          repository: 'eesfrontendcontainer'
-          command: 'push'
-          Dockerfile: '**/Dockerfile'
-          tags: latest
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'
