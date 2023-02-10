@@ -62,7 +62,7 @@ jobs:
         inputs:
           workingDir: '.'
           targetType: 'inline'
-          script: 'rm -rf src/explore-education-statistics-admin && rm -rf src/explore-education-statistics-ckeditor && rm -rf src/GovUk.* && ls -lha src/'
+          script: 'pnpm clean && rm -rf src/explore-education-statistics-admin && rm -rf src/explore-education-statistics-ckeditor && rm -rf src/GovUk.* && ls -lha src/'
 
       - task: 'ArchiveFiles@2'
         displayName: 'Archive files'
