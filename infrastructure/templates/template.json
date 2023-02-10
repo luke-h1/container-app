@@ -58,7 +58,7 @@
       "sku": {
         "name": "[parameters('sku')]"
       },
-      "kind": "linux",
+      "kind": "container",
       "properties": {
         "reserved": true
       }
