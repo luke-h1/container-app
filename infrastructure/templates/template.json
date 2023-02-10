@@ -19,7 +19,7 @@
     },
     "location": {
       "type": "string",
-      "defaultValue": "dfe-development",
+      "defaultValue": "[resourceGroup().location]",
       "metadata": {
         "description": "Location for all resources."
       }
