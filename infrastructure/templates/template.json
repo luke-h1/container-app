@@ -76,7 +76,7 @@
         "name": "[variables('webAppPortalName')]",
         "reserved": true,
         "siteConfig": {
-          "linuxFxVersion": "[concat('DOCKER|', parameters('dockerImageName'))]",
+          // "linuxFxVersion": "[concat('DOCKER|', parameters('dockerImageName'))]",
           "alwaysOn": true,
           "appSettings": [
             {
