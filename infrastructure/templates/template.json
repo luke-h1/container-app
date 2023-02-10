@@ -11,7 +11,7 @@
   "parameters": {
     "webAppName": {
       "type": "string",
-      "defaultValue": "ees-dev-fe-container",
+      "defaultValue": "ees-pnpm-linux-container",
       "minLength": 2,
       "metadata": {
         "description": "Web app name."
@@ -58,7 +58,7 @@
       "sku": {
         "name": "[parameters('sku')]"
       },
-      "kind": "container",
+      "kind": "app, linux, container",
       "properties": {
         "reserved": true
       }
