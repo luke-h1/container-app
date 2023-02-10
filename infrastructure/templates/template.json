@@ -33,7 +33,7 @@
     },
     "linuxFxVersion": {
       "type": "string",
-      "defaultValue": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer:latest",
+      "defaultValue": "DOTNETCORE|6.0",
       "metadata": {
         "description": "The Runtime stack of current web app"
       }
