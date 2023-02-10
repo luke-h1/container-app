@@ -16,7 +16,6 @@ jobs:
     pool:
       vmImage: 'ubuntu-20.04'
       demands: azureps
-
     steps:
       - task: NodeTool@0
         displayName: 'Install Node.js $(NODE_VERSION)'
