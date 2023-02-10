@@ -3,7 +3,6 @@ variables:
   CI: true
   NODE_VERSION: 16.14.2
   DOTNET_VERSION: 6.0.x
-  pnpm_config_cache: $(Pipeline.Workspace)/.pnpm-store
 
 trigger:
 - main
@@ -16,19 +15,6 @@ jobs:
     pool:
       vmImage: 'ubuntu-20.04'
       demands: azureps
-
-    steps:
-      - task: Cache@2
-        inputs:
-          key: 'pnpm | "$(Agent.OS)" | pnpm-lock.yaml'
-          path: $(pnpm_config_cache)
-        displayName: Cache pnpm
-
-      - task: Cache@2
-        inputs:
-          key: next | $(Agent.OS) | pnpm-lock.yaml
-          path: "$(System.DefaultWorkingDirectory)/src/explore-education-statistics-frontend/.next/cache"
-        displayName: "Cache .next/cache"
 
       - task: NodeTool@0
         displayName: 'Install Node.js $(NODE_VERSION)'
@@ -56,7 +42,6 @@ jobs:
           targetType: 'inline'
           script: 'pnpm tsc'
 
-        
       - task: 'Bash@3'
         displayName: 'Purge'
         inputs:
