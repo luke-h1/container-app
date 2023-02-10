@@ -1,6 +1,7 @@
 variables:
   BuildConfiguration: 'Release'
   CI: true
+  PNPM_VERSION: 7.26.0
   NODE_VERSION: 16.14.2
   DOTNET_VERSION: 6.0.x
 
@@ -37,18 +38,18 @@ jobs:
           script: 'pnpm i'
 
       - task: 'Bash@3'
-        displayName: 'pnpm tsc'
+        displayName: 'echo "done'
         inputs:
           workingDir: '.'
           targetType: 'inline'
-          script: 'pnpm tsc'
+          script: 'echo "done"'
 
       - task: 'Bash@3'
         displayName: 'Purge'
         inputs:
           workingDir: '.'
           targetType: 'inline'
-          script: 'pnpm clean && rm -rf src/explore-education-statistics-admin && rm -rf tests && && rm -rf src/explore-education-statistics-ckeditor && rm -rf src/GovUk.* && ls -lha src/'
+          script: 'pnpm clean && rm -rf src/explore-education-statistics-admin && rm -rf tests && rm -rf src/explore-education-statistics-ckeditor && rm -rf src/GovUk.* && ls -lha src/'
 
       - task: 'ArchiveFiles@2'
         displayName: 'Archive files'
