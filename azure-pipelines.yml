@@ -44,37 +44,11 @@ jobs:
           targetType: 'inline'
           script: 'rm -rf src/GovUk.*'
 
-      - task: 'Bash@3'
-        displayName: 'pnpm install...'
+      - task: DockerCompose@0
         inputs:
-          workingDir: '.'
-          targetType: 'inline'
-          script: 'pnpm --filter=explore-education-statistics-frontend... install'
-
-
-      - task: 'Bash@3'
-        displayName: 'build FE'
-        inputs:
-          workingDir: '.'
-          targetType: 'inline'
-          script: 'pnpm --filter=explore-education-statistics-frontend build'
-
-      - task: 'Bash@3'
-        displayName: 'prod install'
-        inputs:
-          workingDir: '.'
-          targetType: 'inline'
-          script: 'pnpm --filter=explore-education-statistics-frontend... --prod install'
-
-      - task: 'ArchiveFiles@2'
-        displayName: 'Archive frontend'
-        inputs:
-          rootFolderOrFile: './src/explore-education-statistics-frontend'
-          includeRootFolder: false
-          archiveFile: '$(Build.ArtifactStagingDirectory)/public-frontend.zip'
-
-      - task: 'PublishPipelineArtifact@0'
-        displayName: 'Publish Pipeline Artifact'
-        inputs:
-          artifactName: 'public-frontend'
-          targetPath: '$(Build.ArtifactStagingDirectory)'
+          containerregistrytype: 'Azure Container Registry'
+          azureSubscription: 'Hive IT (subscription().subscriptionId)'
+          azureContainerRegistry: '{"loginServer":"eesdev.azurecr.io", "id" : "[concat("/subscriptions/", subscription().subscriptionId, "/resourceGroups/", resourceGroup().name, "/providers/Microsoft.ContainerRegistry/registries/eesdev")]"}'
+          dockerComposeFile: '**/docker-compose.yml'
+          action: 'Run a Docker Compose command'
+          dockerComposeCommand: 'build'
