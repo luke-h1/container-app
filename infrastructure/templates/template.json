@@ -3,7 +3,9 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "environment": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "production"
+
     },
     "location": {
       "type": "string",
