@@ -50,3 +50,5 @@ jobs:
           repository: 'eesfrontendcontainer'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
+          tags: |
+            latest

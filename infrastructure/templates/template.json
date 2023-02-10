@@ -33,7 +33,7 @@
     },
     "linuxFxVersion": {
       "type": "string",
-      "defaultValue": "DOTNETCORE|6.0",
+      "defaultValue": "NODE|16-lts",
       "metadata": {
         "description": "The Runtime stack of current web app"
       }
