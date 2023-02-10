@@ -38,12 +38,11 @@ jobs:
           script: 'pnpm i'
 
       - task: 'Bash@3'
-        displayName: 'purge Gov.uk'
+        displayName: 'pnpm tsc'
         inputs:
           workingDir: '.'
           targetType: 'inline'
-          script: 'rm -rf src/GovUk.*'
-
+          script: 'pnpm tsc'
       - task: Docker@2
         inputs:
           containerRegistry: 'eesdev'
