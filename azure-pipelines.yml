@@ -16,6 +16,7 @@ jobs:
       vmImage: 'ubuntu-20.04'
       demands: azureps
 
+    steps:
       - task: NodeTool@0
         displayName: 'Install Node.js $(NODE_VERSION)'
         inputs:
@@ -47,7 +48,7 @@ jobs:
         inputs:
           workingDir: '.'
           targetType: 'inline'
-          script: 'pnpm clean && rm -rf src/explore-education-statistics-admin && rm -rf src/explore-education-statistics-ckeditor && rm -rf src/GovUk.* && ls -lha src/'
+          script: 'pnpm clean && rm -rf src/explore-education-statistics-admin && rm -rf tests && && rm -rf src/explore-education-statistics-ckeditor && rm -rf src/GovUk.* && ls -lha src/'
 
       - task: 'ArchiveFiles@2'
         displayName: 'Archive files'
