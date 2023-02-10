@@ -2,108 +2,75 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "location": {
+    "environment_name": {
       "type": "string",
-      "defaultValue": "[resourceGroup().location]",
+      "defaultValue": "eesdev",
       "metadata": {
-        "description": "Location (region) for all resources."
+        "description": "The name of the environment to deploy to"
       }
-    },
-    "appServiceSku": {
-      "type": "string",
-      "defaultValue": "B1",
-      "metadata": {
-        "description": "The SKU of App Service Plan "
-      }
-    },
-    "dockerImageName": {
-      "type": "string",
-      "defaultValue": "eesdev.azurecr.io/eesfrontendcontainer:latest"
-    },
-    "dockerRegistryUrl": {
-      "type": "string",
-      "defaultValue": "https://eesdev.azurecr.io"
-    },
-    "dockerRegistryUsername": {
-      "type": "string",
-      "defaultValue": "eesdev"
-    },
-    "dockerRegistryPassword": {
-      "type": "string",
-      "defaultValue": ""
-    },
-    "_artifactsLocation": {
-      "type": "string"
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring"
     }
   },
   "variables": {
-    "name": "ees-",
-    "webAppPortalName": "[concat(variables('name'), production, '-webapp')]",
-    "appServicePlanName": "[concat(variables('name'), production,'-hosting')]"
+    "containerAppName": "eesdev-frontend",
+    "containerRegistryName": "eesdev"
   },
   "resources": [
-    // {
-    //   "apiVersion": "2017-08-01",
-    //   "type": "Microsoft.Web/serverfarms",
-    //   "kind": "linux",
-    //   "name": "[variables('appServicePlanName')]",
-    //   "location": "[parameters('location')]",
-    //   "comments": "This app service plan is used for the web app and slots.",
-    //   "properties": {
-    //     "reserved": true
-    //   },
-    //   "dependsOn": [],
-    //   "sku": {
-    //     "name": "[parameters('appServiceSku')]"
-    //   }
-    // },
-    // {
-    //   "type": "Microsoft.Web/sites",
-    //   "apiVersion": "2016-08-01",
-    //   "name": "[variables('webAppPortalName')]",
-    //   "kind": "app,linux,container",
-    //   "location": "[parameters('location')]",
-    //   "dependsOn": [
-    //     "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
-    //   ],
-    //   "properties": {
-    //     "name": "[variables('webAppPortalName')]",
-    //     "reserved": true,
-    //     "siteConfig": {
-    //       // "linuxFxVersion": "[concat('DOCKER|', parameters('dockerImageName'))]",
-    //       "alwaysOn": true,
-    //       "appSettings": [
-    //         {
-    //           "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
-    //           "value": "false"
-    //         }
-    //       ]
-    //     },
-    //     "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
-    //   }
-    // }
     {
-      "type": "Microsoft.Web/sites",
-      "name": "ees-fe",
-      "apiVersion": "2021-02-01",
-      "location": "[resourceGroup().location]",
-      "identity": {
-        "type": "SystemAssigned"
+      "type": "Microsoft.App/containerApps",
+      "apiVersion": "2022-03-01",
+      "name": "eesdev-frontend",
+      "location": "uksouth",
+      "tags": {
+        "Solution": "ees"
       },
       "properties": {
-        "name": "ees-fe",
-        "serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', ees-fe",
-        "hostingEnvironment": "",
-        "kind": "app,linux,container",
-        "httpsOnly": true,
-        "clientAffinityEnabled": false,
-        "siteConfig": {
-          "http20Enabled": true,
-          "AlwaysOn": true,
-          "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer:latest"
+        "name": "[variables('containerAppName')]",
+        "ingress": {
+          "allowInsecure": false,
+          "external": true,
+          "targetPort": 3000,
+          "traffic": [
+            {
+              "label": "test",
+              "latestRevision": true,
+              "revisionName": "latest",
+              "weight": 100
+            }
+          ],
+          "transport": "http"
+        },
+        "managedEnvironmentId": "[resourceId('Microsoft.App/managedEnvironments', parameters('environment_name'))]",
+        "template": {
+          "containers": [
+            {
+              "image": "[variables('containerRegistryName')].azurecr.io/[variables('containerAppName')]:latest",
+              "name": "[variables('containerAppName')]",
+              "probes": [
+                {
+                  "httpGet": {
+                    "path": "/",
+                    "port": 3000,
+                    "scheme": "http"
+                  },
+                  "initialDelaySeconds": 10,
+                  "successThreshold": 1,
+                  "tcpSocket": {
+                    "port": 3000
+                  },
+                  "type": "Readiness"
+                }
+              ],
+              "resources": {
+                "cpu": "[json('0.5')]",
+                "memory": "250mb"
+              }
+            }
+          ],
+          "revisionSuffix": "latest",
+          "scale": {
+            "maxReplicas": 2,
+            "minReplicas": 1
+          }
         }
       }
     }
