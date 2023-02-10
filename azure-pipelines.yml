@@ -44,11 +44,9 @@ jobs:
           targetType: 'inline'
           script: 'rm -rf src/GovUk.*'
 
-      - task: DockerCompose@0
+      - task: Docker@2
         inputs:
-          containerregistrytype: 'Azure Container Registry'
-          azureSubscription: 'Hive IT (subscription().subscriptionId)'
-          azureContainerRegistry: '{"loginServer":"eesdev.azurecr.io", "id" : "[concat("/subscriptions/", subscription().subscriptionId, "/resourceGroups/", resourceGroup().name, "/providers/Microsoft.ContainerRegistry/registries/eesdev")]"}'
-          dockerComposeFile: '**/docker-compose.yml'
-          action: 'Run a Docker Compose command'
-          dockerComposeCommand: 'build'
+          containerRegistry: 'eesdev'
+          repository: 'eesfrontendcontainer'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
