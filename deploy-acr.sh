@@ -11,4 +11,3 @@ docker build -t eesfrontendcontainer:$VERSION .
 
 docker tag eesfrontendcontainer:$VERSION $CONTAINER_REGISTRY.azurecr.io/eesfrontendcontainer:$VERSION
 docker push $CONTAINER_REGISTRY.azurecr.io/eesfrontendcontainer:$VERSION
-# 
