@@ -45,21 +45,21 @@
             {
               "image": "[variables('containerRegistryName')].azurecr.io/[variables('containerAppName')]:latest",
               "name": "[variables('containerAppName')]",
-              "probes": [
-                {
-                  "httpGet": {
-                    "path": "/",
-                    "port": 3000,
-                    "scheme": "http"
-                  },
-                  "initialDelaySeconds": 10,
-                  "successThreshold": 1,
-                  "tcpSocket": {
-                    "port": 3000
-                  },
-                  "type": "Readiness"
-                }
-              ],
+              // "probes": [
+              //   {
+              //     "httpGet": {
+              //       "path": "/",
+              //       "port": 3000,
+              //       "scheme": "http"
+              //     },
+              //     "initialDelaySeconds": 10,
+              //     "successThreshold": 1,
+              //     "tcpSocket": {
+              //       "port": 3000
+              //     },
+              //     "type": "Readiness"
+              //   }
+              // ],
               "resources": {
                 "cpu": "[json('0.5')]",
                 "memory": "250mb"
