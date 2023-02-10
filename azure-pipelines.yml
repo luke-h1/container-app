@@ -43,11 +43,3 @@ jobs:
           workingDir: '.'
           targetType: 'inline'
           script: 'pnpm tsc'
-      - task: Docker@2
-        inputs:
-          containerRegistry: 'eesdev'
-          repository: 'eesfrontendcontainer'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
-          tags: |
-            latest
