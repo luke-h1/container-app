@@ -27,7 +27,7 @@ jobs:
       - task: Cache@2
         inputs:
           key: next | $(Agent.OS) | pnpm-lock.yaml
-          path: "$(System.DefaultWorkingDirectory)/src/explore-education-statistics/.next/cache"
+          path: "$(System.DefaultWorkingDirectory)/src/explore-education-statistics-frontend/.next/cache"
         displayName: "Cache .next/cache"
 
       - task: NodeTool@0
