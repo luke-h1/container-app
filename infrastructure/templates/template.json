@@ -11,7 +11,7 @@
   "parameters": {
     "webAppName": {
       "type": "string",
-      "defaultValue": "[format('webApp-{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "ees-dev-fe-container",
       "minLength": 2,
       "metadata": {
         "description": "Web app name."
