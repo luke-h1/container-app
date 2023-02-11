@@ -31,13 +31,6 @@
         "description": "The SKU of App Service Plan."
       }
     },
-    "linuxFxVersion": {
-      "type": "string",
-      "defaultValue": "NODE|16-lts",
-      "metadata": {
-        "description": "The Runtime stack of current web app"
-      }
-    },
     "repoUrl": {
       "type": "string",
       "defaultValue": "https://github.com/luke-h1/container-app-ees",
@@ -74,7 +67,7 @@
         "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          "linuxFxVersion": "DOCKER|eesfrontendcontainer",
+          "linuxFxVersion": "DOTNETCORE|6.0",
           "minTlsVersion": "1.2",
           "ftpsState": "FtpsOnly",
           "nodeVersion": "16-lts"
