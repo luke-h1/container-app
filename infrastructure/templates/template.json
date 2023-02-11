@@ -58,7 +58,8 @@
       "sku": {
         "name": "[parameters('sku')]"
       },
-      "kind": "container",
+      "kind": "linux",
+      "dependsOn": [],
       "properties": {
         "reserved": true
       }
@@ -67,14 +68,16 @@
       "type": "Microsoft.Web/sites",
       "apiVersion": "2021-02-01",
       "name": "[parameters('webAppName')]",
+      "kind": "app,linux,container",
       "location": "[parameters('location')]",
       "properties": {
         "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          "linuxFxVersion": "[parameters('linuxFxVersion')]",
+          "linuxFxVersion": "DOCKER|eesfrontendcontainer",
           "minTlsVersion": "1.2",
-          "ftpsState": "FtpsOnly"
+          "ftpsState": "FtpsOnly",
+          "nodeVersion": "16-lts"
         }
       },
       "identity": {
