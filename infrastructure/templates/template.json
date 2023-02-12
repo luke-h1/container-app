@@ -67,7 +67,7 @@
         "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          "linuxFxVersion": "DOTNETCORE|6.0",
+          "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer:latest",
           "minTlsVersion": "1.2",
           "ftpsState": "FtpsOnly",
           "nodeVersion": "16-lts"
