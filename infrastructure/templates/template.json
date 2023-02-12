@@ -37,6 +37,27 @@
       "metadata": {
         "description": "Optional Git Repo URL"
       }
+    },
+    "DOCKER_REGISTER_SERVER_URL": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The URL of the Docker registry."
+      }
+    },
+    "DOCKER_REGISTRY_SERVER_USERNAME": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The username to log in to the Docker registry."
+      }
+    },
+    "DOCKER_REGISTRY_SERVER_PASSWORD": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The password to log in to the Docker registry."
+      }
     }
   },
   "variables": {
@@ -67,10 +88,15 @@
         "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer:latest",
+          "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer",
           "minTlsVersion": "1.2",
           "ftpsState": "FtpsOnly",
-          "nodeVersion": "16-lts"
+          "nodeVersion": "16-lts",
+          "WEBSITES_PORT": 3000,
+          "DOCKER_REGISTRY_SERVER_URL": "[parameters('DOCKER_REGISTER_SERVER_URL')]",
+          "DOCKER_REGISTRY_SERVER_USERNAME": "[parameters('DOCKER_REGISTRY_SERVER_USERNAME')]",
+          "DOCKER_REGISTRY_SERVER_PASSWORD": "[parameters('DOCKER_REGISTRY_SERVER_PASSWORD')]",
+          "WEBSITES_ENABLE_APP_SERVICE_STORAGE": true
         }
       },
       "identity": {
