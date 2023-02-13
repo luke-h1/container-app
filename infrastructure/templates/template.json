@@ -84,9 +84,6 @@
       "properties": {
         "reserved": true
       },
-      "siteConfig": {
-        "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer"
-      }
     },
     {
       "type": "Microsoft.Web/sites",
