@@ -9,7 +9,7 @@
     }
   },
   "parameters": {
-    // EES existing frontend environment variables start 
+    // EES existing frontend environment variables start
     "publicAppBasicAuthUsername": {
       "type": "string",
       "metadata": {
@@ -132,20 +132,20 @@
           "DOCKER_REGISTRY_SERVER_USERNAME": "[parameters('DOCKER_REGISTRY_SERVER_USERNAME')]",
           "DOCKER_REGISTRY_SERVER_PASSWORD": "[parameters('DOCKER_REGISTRY_SERVER_PASSWORD')]",
           "DOCKER_IMAGE_TAG": "latest",
-          "WEBSITES_ENABLE_APP_SERVICE_STORAGE": true,
-          // EES frontend env vars start
-          "APP_ENV": "development",
-          "BASIC_AUTH": true,
-          "BASIC_AUTH_USERNAME": "[parameters('publicAppBasicAuthUsername')]",
-          "BASIC_AUTH_PASSWORD": "[parameters('publicAppBasicAuthPassword')]",  
-          "CONTENT_API_BASE_URL": "[concat('https://', parameters('contentApiUrl'),'/api')]",
-          "DATA_API_BASE_URL": "[concat('https://', parameters('dataApiUrl'),'/api')]",
-          "NOTIFICATION_API_BASE_URL": "[concat('https://', parameters('notifyApiUrl'),'/api')]",
-          "NEXT_CONFIG_MODE": "server",
-          "NODE_ENV": "production",
-          "PUBLIC_URL": "https://ees-pnpm-linux-container.azurewebsites.net/"
-          // EES - frontend env vars end
-        }
+          "WEBSITES_ENABLE_APP_SERVICE_STORAGE": true
+        },
+        // EES frontend env vars start
+        "APP_ENV": "development",
+        "BASIC_AUTH": true,
+        "BASIC_AUTH_USERNAME": "[parameters('publicAppBasicAuthUsername')]",
+        "BASIC_AUTH_PASSWORD": "[parameters('publicAppBasicAuthPassword')]",
+        "CONTENT_API_BASE_URL": "[parameters('contentApiUrl')]",
+        "DATA_API_BASE_URL": "[parameters('dataApiUrl')]",
+        "NOTIFICATION_API_BASE_URL": "[parameters('notifyApiUrl')]",
+        "NEXT_CONFIG_MODE": "server",
+        "NODE_ENV": "production",
+        "PUBLIC_URL": "https://ees-pnpm-linux-container.azurewebsites.net/"
+        // EES - frontend env vars end
       },
       "identity": {
         "type": "SystemAssigned"
