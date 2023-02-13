@@ -72,7 +72,7 @@
       "sku": {
         "name": "[parameters('sku')]"
       },
-      "kind": "linux",
+      "kind": "app,linux,container",
       "dependsOn": [],
       "properties": {
         "reserved": true
@@ -88,7 +88,9 @@
         "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          "linuxFxVersion": "concat('DOCKER|', parameters('DOCKER_REGISTER_SERVER_URL'), '/', eesfrontendcontainer, ':', latest)",
+          "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer:latest",
+          "acrUseManagedIdentityCreds": false,
+          "alwaysOn": true,
           "minTlsVersion": "1.2",
           "ftpsState": "FtpsOnly",
           "nodeVersion": "16-lts",
