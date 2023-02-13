@@ -9,6 +9,12 @@
     }
   },
   "parameters": {
+    "_artifactsLocation": {
+      "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring"
+    },
     "webAppName": {
       "type": "string",
       "defaultValue": "ees-pnpm-linux-container",
@@ -88,8 +94,7 @@
         "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          // "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer",
-          "DOCKER_CUSTOM_IMAGE_NAME": "eesdev.azurecr.io/eesfrontendcontainer",
+          "linuxFxVersion": "concat('DOCKER|', parameters('DOCKER_REGISTER_SERVER_URL'), '/', eesfrontendcontainer, ':', latest)",
           "minTlsVersion": "1.2",
           "ftpsState": "FtpsOnly",
           "nodeVersion": "16-lts",
