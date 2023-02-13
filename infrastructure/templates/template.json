@@ -83,7 +83,7 @@
       "dependsOn": [],
       "properties": {
         "reserved": true
-      },
+      }
     },
     {
       "type": "Microsoft.Web/sites",
@@ -97,7 +97,6 @@
         "httpsOnly": true,
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          "linuxFxVersion": "DOCKER|eesdev.azurecr.io/eesfrontendcontainer",
           "acrUseManagedIdentityCreds": false,
           "alwaysOn": true,
           "minTlsVersion": "1.2",
