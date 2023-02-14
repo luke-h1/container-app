@@ -1,4 +1,4 @@
-FROM node:16-bullseye-slim AS builder
+FROM node:16.14.2-alpine AS builder
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN corepack enable
 RUN pnpm --filter=explore-education-statistics-frontend... install
 RUN pnpm --filter=explore-education-statistics-frontend build
 
-FROM node:16-alpine
+FROM node:16.14.2-alpine
 
 WORKDIR /usr/src/app
 
