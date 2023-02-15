@@ -58,6 +58,6 @@ jobs:
           artifactName: 'public-frontend'
           targetPath: '$(Build.ArtifactStagingDirectory)'
     
-      # move docker here
+      # move docker build + push here
       # TODO: dont use latest tag - use build number used in footer
       # see if pwd auto-generated / set
