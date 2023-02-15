@@ -40,11 +40,11 @@ class SlackService:
             failed_tests_field = {"title": "Failed tests", "value": failed_tests}
         return [
             {
-                "pretext": "All results",
+                "pretext": f"All container app service results",
                 "color": "danger" if failed_tests else "good",
                 "mrkdwn_in": ["pretext"],
                 "fields": [
-                    {"title": "Environment", "value": env},
+                    {"title": "Environment", "value": "PNPM prototype"},
                     {"title": "Suite", "value": suite.replace("tests/", "")},
                     {"title": "Total test cases", "value": passed_tests + failed_tests},
                     failed_tests_field,
