@@ -32,7 +32,7 @@
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
     "dotenv-safe": "^8.2.0",
-    "esbuild": "^0.13.12",
+    "esbuild": "^0.17.10",
     "esbuild-runner": "^2.2.1",
     "form-data": "^4.0.0",
     "formdata-node": "^4.3.3",
