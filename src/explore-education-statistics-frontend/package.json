@@ -33,7 +33,7 @@
     "react-markdown": "^4.3.1",
     "recharts": "^2.1.16",
     "referrer-policy": "^1.2.0",
-    "use-immer": "^0.6.0",
+    "use-immer": "^0.8.1",
     "webpack": "^5.57.1",
     "yup": "^0.29.3",
     "nanoid": "^4.0.1"
